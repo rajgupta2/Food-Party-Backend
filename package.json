@@ -1,0 +1,21 @@
+{
+  "name": "foodparty",
+  "version": "1.0.0",
+  "description": "It's a project to provide services of food orders and others.",
+  "main": "./Routes/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./Routes/index.js -p 5000",
+    "dev": "nodemon ./Routes/index.js -p 5000"
+  },
+  "author": "Raj Gupta",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.13.1",
+    "mongoose": "^8.11.0",
+    "path": "^0.12.7"
+  }
+}
