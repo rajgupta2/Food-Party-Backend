@@ -1,43 +1,31 @@
 const express = require('express');
 const ObjectId = require('mongodb').ObjectId;
-const {Colls_User_Address} = require('../Models/DB');
+const {Colls_User_Address, Colls_User} = require('../Models/DB');
 
 const address = express();
 
 address.route("/")
-    .get((req, res) => {
-        Colls_User_Address.find({ Email: req.body.Email }).then((data) => {
-            res.json({ statusCode: 200, data: data });
+    .get(async (req, res) => {
+        const user=await Colls_User.findOne({Email:req.headers.email});
+        Colls_User_Address.find({ _User:user._id }).then((data) => {
+            res.json({ statusCode: 200, address: data });
         }).catch((err) => {
             res.json({ statusCode: 500, message: err.message });
         });
-    }).post((req, res) => {
+    }).post(async(req, res) => {
+        const user=await Colls_User.findOne({Email:req.body.Email});
         const newaddress = new Colls_User_Address({
-            Name: req.body.Name,
-            Street: req.body.Street,
-            City: req.body.City,
-            PinCode: req.body.PinCode,
-            Email: req.body.Email
+            Name: req.body.name,
+            Street: req.body.street,
+            City: req.body.city,
+            PinCode: req.body.pincode,
+            _User:user._id
         });
         newaddress.save().then(() => {
             res.json({ statusCode: 200, message: 'Address added successfully.' });
         }).catch((err) => {
             res.json({ statusCode: 500, message: err.message });
         });
-    }).put((req, res) => {
-        const address_id = req.body.id;
-        Colls_User_Address.updateOne({ _id: new ObjectId(address_id) }, {
-            Name: req.body.Name,
-            Street: req.body.Street,
-            City: req.body.City,
-            PinCode: req.body.PinCode,
-            Email: req.body.Email
-        }).then(() => {
-            res.json({ statusCode: 200, message: 'Address updated successfully.' });
-        }).catch((err) => {
-            res.json({ statusCode: 500, message: err.message });
-        });
-
     }).delete((req, res) => {
         Colls_User_Address.deleteOne({ _id: req.body.id }).then(() => {
             res.json({ statusCode: 200, message: 'Address deleted successfully.' });

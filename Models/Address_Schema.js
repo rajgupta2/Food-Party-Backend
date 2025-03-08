@@ -8,8 +8,8 @@ const Address_Schema=mongoose.Schema({
         type:Number,
         length: 6
     },
-    Email:{
-        type: String,
+    _User:{
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref:'Colls_User'
     }

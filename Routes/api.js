@@ -11,7 +11,6 @@ const restaurantAPI=require('./restaurant');
 const userDetailsAPI=require('./userDetails');
 
 const api=express();
-console.log("api");
 api.use('/user',userAPI);
 api.use('/userDetails',userDetailsAPI);
 api.use('/restaurant',restaurantAPI);

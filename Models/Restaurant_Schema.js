@@ -8,8 +8,8 @@ const Restaurant_Schema=mongoose.Schema({
     OperatingHours:String,
     Rating:String,
     CoverImage:String,
-    Email: {
-        type: String,
+    _UserId: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Colls_User',
         unique: true

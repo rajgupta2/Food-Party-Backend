@@ -5,8 +5,8 @@ const MenuItem_Schema=mongoose.Schema({
     Description:String,
     Price:Number,
     ImageUrl:String,
-    RestaurantEmail: {
-        type: String,
+    _Restaurant: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Colls_Restaurant',
         required: true
     }

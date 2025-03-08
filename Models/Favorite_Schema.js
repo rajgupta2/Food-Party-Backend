@@ -6,7 +6,7 @@ const Favorite_Schema = mongoose.Schema({
         ref:'Colls_User',
         required: true
     },
-    Item_id: {
+    _MenuItem: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Colls_MenuItems',
             required: true

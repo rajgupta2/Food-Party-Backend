@@ -1,14 +1,17 @@
 const mongoose = require('mongoose');
 
 const Offer_Schema = mongoose.Schema({
-    Title:String,
-    Email:{
-            type:String,
-            ref:'Colls_Restaurant'
-    },
+    Title: String,
+    Description: String,
+    Dis_Type: String,
     Discount: String,
-    Validity: String,
-    ImageUrl:String,
+    Min_Order: String,
+    StartDate: String,
+    EndDate: String,
+    _Restaurant:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Colls_Restaurant'
+    },
 });
 
 

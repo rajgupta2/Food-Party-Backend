@@ -2,20 +2,21 @@ const mongoose = require('mongoose');
 
 const d = new Date();
 const Cart_Schema = mongoose.Schema({
-    Email: {
+    _User: {
         type: String,
         ref: 'Colls_User',
         required: true
     },
-    Item_id: {
+    _MenuItem: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Colls_MenuItems',
         required: true
     },
     Quantity: {
-       type: Number,
+        type: Number,
         required: true,
-        min: 1
+        min: 1,
+        default:1
     }
 });
 
