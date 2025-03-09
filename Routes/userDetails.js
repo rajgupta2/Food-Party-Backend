@@ -5,7 +5,7 @@ const userDetails = express();
 
 userDetails.route('/')
     .get(async(req, res) => {
-        const user=await Colls_User.find({Email:req.headers.email});
+        const user=await Colls_User.findOne({Email:req.headers.email});
         Colls_UserDetails.findOne({ _User: user._id}).then((us) => {
             if (us!==undefined || us!==null)
                 res.json({ statusCode: 200, data: us });
@@ -17,7 +17,7 @@ userDetails.route('/')
         });
     }).post(async (req, res) => {
         res.set('Content-Type', 'application/json');
-        const user=await Colls_User.find({Email:req.body.Email});
+        const user=await Colls_User.findOne({Email:req.body.Email});
         const newuser = new Colls_UserDetails({
             _User: user._id,
             Name: req.body.Name,
@@ -29,7 +29,7 @@ userDetails.route('/')
             res.json({ statusCode: 500, message: 'The database already contain your profile.', ErrorMessage: err.message })
         });
     }).put(async (req, res) => {
-        const user=await Colls_User.find({Email:req.body.Email});
+        const user=await Colls_User.findOne({Email:req.body.Email});
         Colls_UserDetails.updateOne({_User:user._id},{
             Name: req.body.Name, Phone: req.body.Phone
         }).then(()=>{
@@ -39,7 +39,7 @@ userDetails.route('/')
         })
     })
     .delete((req, res) => {
-        Colls_UserDetails.deleteOne({ Email: req.headers.Email }).then(() => {
+        Colls_UserDetails.deleteOne({ Email: req.headers.email }).then(() => {
             res.json({ statusCode: 200, message: 'Your Profile deleted successfully.' });
         }).catch((err) => {
             res.json({ statusCode: 500, message: err.message });

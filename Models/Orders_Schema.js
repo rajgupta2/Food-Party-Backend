@@ -2,10 +2,9 @@ const mongoose = require('mongoose');
 
 const d = new Date();
 const Orders_Schema = mongoose.Schema({
-    OrderId: String,
     OrderDate: {
         type: String,
-        default: d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear()
+        default: d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear()+ ` ${d.getHours()}:${d.getMinutes()}`
     },
     Customer:
     {
@@ -16,10 +15,14 @@ const Orders_Schema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Colls_Restaurant'
     },
-    DeliveryAddress: String,
+    DeliveryAddress:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Colls_User_Address',
+        required: true
+    },
     Status: {
         type: String,
-        enum: ['Pending', 'Processing', 'Completed', 'Cancelled'],
+        enum: ['Pending', 'Accept', 'Ready', 'Cancelled','Delivered'],
         default: 'Pending'
     },
     paymentMethod: String,
@@ -28,7 +31,7 @@ const Orders_Schema = mongoose.Schema({
         enum: ['Pending', 'Processing', 'Completed', 'Cancelled'],
         default: 'Pending'
     },
-    Itmes: [
+    Items: [
         {
             item: {
                 type: mongoose.Schema.Types.ObjectId,

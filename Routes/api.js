@@ -21,4 +21,9 @@ api.use('/order',orderAPI);
 api.use('/offer',offerAPI);
 api.use('/favorite',favoriteAPI);
 
+api.get("/",(req,res)=>{
+    console.log("Hi there!");
+    res.json({success:true});
+})
+
 module.exports = api;
